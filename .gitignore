@@ -1,0 +1,7 @@
+__pycache__/
+.pytest_cache
+documents/
+# Ignore compiled Python files
+*.pyc
+*.pyo
+*.pyd
