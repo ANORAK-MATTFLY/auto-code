@@ -37,7 +37,7 @@ def process_directory(directory)-> dict:
     folders_to_ignore = [".pytest_cache", "__pycache__", "node_modules", "documents", "dist", "ano_code.egg-info", "auto-code-env"]
     avoid = []
 
-    fl = {".py", ".js", ".go", ".ts"}
+    fl = {".py", ".js", ".go", ".ts", ".tsx", ".jsx", ".dart"}
     
     
     for root, dirs, files in os.walk(directory):

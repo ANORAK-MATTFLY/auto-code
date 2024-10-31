@@ -12,6 +12,7 @@ ano_code.egg-info/PKG-INFO
 ano_code.egg-info/SOURCES.txt
 ano_code.egg-info/dependency_links.txt
 ano_code.egg-info/entry_points.txt
+ano_code.egg-info/requires.txt
 ano_code.egg-info/top_level.txt
 auto_code/__init__.py
 auto_code/cli.py

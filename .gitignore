@@ -1,9 +1,9 @@
 __pycache__/
 auto-code-env
-
+ano_code.egg-info
 .pytest_cache
 documents/
-# Ignore compiled Python files
+
 *.pyc
 *.pyo
 *.pyd
