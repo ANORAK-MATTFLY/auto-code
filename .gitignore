@@ -1,4 +1,6 @@
 __pycache__/
+auto-code-env
+
 .pytest_cache
 documents/
 # Ignore compiled Python files

@@ -34,30 +34,29 @@ def process_directory(directory)-> dict:
     data_store = {}
     
     # Walk through the directory and its subdirectories
-    folders_to_ignore = [".pytest_cache", "__pycache__", "node_modules", "documents"]
+    folders_to_ignore = [".pytest_cache", "__pycache__", "node_modules", "documents", "dist", "ano_code.egg-info", "auto-code-env"]
     avoid = []
 
-        
+    fl = {".py", ".js", ".go", ".ts"}
     
     
     for root, dirs, files in os.walk(directory):
         # Modify dirs in-place to exclude specific directories
         dirs[:] = [d for d in dirs if d not in folders_to_ignore]
-            
-        if root not in avoid:
-            for file_name in files:
-                file_path = os.path.join(root, file_name)
-                content = process_file(file_path)  # Read file into a string
-                if content is not None:
-                    file_contents[file_path] = content  # Store the string content for each file
-                    if file_name:
-                        md_content = f"{content}"
-                        md_file = file_name.replace(".py", "")
-                        create_markdown_file(f"./documents/{md_file}", md_content)
-                        data_store[file_path] = {
-                            "file_name": file_name,
-                            "dir": root,
-                            "content": content, 
-                        }
+        for filename in files:
+        # Check if the file has an excluded extension
+            if filename.endswith(tuple(fl)):
+                        file_path = os.path.join(root, filename)
+                        content = process_file(file_path)  # Read file into a string
+                        if content is not None:
+                            file_contents[file_path] = content  # Store the string content for each file
+                            if filename:
+                                md_content = f"{content}"
+                                create_markdown_file(f"./documents/{filename}", md_content)
+                                data_store[file_path] = {
+                                    "file_name": filename,
+                                    "dir": root,
+                                    "content": content, 
+                                }
     return data_store
 

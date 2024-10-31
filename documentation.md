@@ -1,4 +1,4 @@
-**Code Base Documentation**
+**ano-code Documentation**
 ==========================
 
 **Table of Contents**
@@ -9,14 +9,14 @@
 3. [Code Structure](#code-structure)
 4. [API Documentation](#api-documentation)
 5. [Usage Examples](#usage-examples)
-6. [Error and Debugging Guidance](#error-and-debugging-guidance)
-7. [Maintenance Tips and Code Style](#maintenance-tips-and-code-style)
-8. [Contributing to the Codebase](#contributing-to-the-codebase)
+6. [Error Handling and Debugging](#error-handling-and-debugging)
+7. [Contributing to the Project](#contributing-to-the-project)
+8. [Maintenance Tips and Code Style](#maintenance-tips-and-code-style)
 
 **Overview**
 ------------
 
-This codebase is a comprehensive project that leverages natural language processing (NLP) and machine learning (ML) techniques to provide an AI-powered assistant. The project utilizes various libraries, including langchain, openai, and groq, to facilitate text embedding, document loading, and AI model interactions.
+ano-code is a Python project that utilizes natural language processing (NLP) and machine learning (ML) to generate code and provide assistance with programming tasks. The project leverages the OpenAI and Groq APIs to power its functionality.
 
 **Setup and Dependencies**
 -------------------------
@@ -24,7 +24,7 @@ This codebase is a comprehensive project that leverages natural language process
 ### Environment Variables
 
 * `OPENAI_API_KEY`: Set your OpenAI API key in a `.env` file.
-* `NVAPI_API_KEY`: Set your NVIDIA API key for the Groq client.
+* `GROQ_API_KEY`: Set your Groq API key in a `.env` file.
 
 ### Dependencies
 
@@ -32,107 +32,61 @@ This codebase is a comprehensive project that leverages natural language process
 * `openai`
 * `groq`
 * `chromadb`
-* `pytest`
+* `ollama`
+* `rich`
 * `click`
 
 **Code Structure**
 ------------------
 
-The codebase is organized into the following modules:
-
-* `main.py`: Entry point for the CLI tool.
-* `ai_assistant`: Defines the `AIAssistant` class and its dependencies.
-* `file_processing`: Handles file operations, including reading and saving to JSON.
-* `tests`: Contains unit tests for the `file_processing` module.
-* `chromadb_utils`: Utilizes Chroma for vector embedding and database interactions.
+* `main.py`: Entry point for the application.
+* `file_processing/`: Module for handling file operations.
+* `ai_assistant/`: Module for AI-powered assistance.
+* `langchain_community/`: Custom LangChain components.
+* `tests/`: Unit tests for the project.
 
 **API Documentation**
 ---------------------
 
-### AIAssistant Class
+### `file_processing` Module
 
-* `__init__(self, cli: Groq)`: Initializes the assistant with a Groq client.
-* `run_assistant(self, prompt: str, command: str) -> str`: Executes the assistant with a given prompt and command.
+* `process_file(file_path: str) -> str`: Reads the content of a file and returns it as a string.
+* `create_markdown_file(filepath: str, content: str, encoding: str = 'utf-8')`: Creates a Markdown file with the provided content.
+* `process_directory(directory: str) -> dict`: Walks through the directory and reads each file's content into a string.
 
-### LlmInterface and LlmOptions
+### `ai_assistant` Module
 
-* `LlmInterface`: Abstract base class for LLM interactions.
-* `LlmOptions`: Data class for LLM options, including messages, model, temperature, and more.
+* `PromptLlm(llm_options: LlmOptions) -> str`: Generates a prompt using the provided LLM options.
+* `AIAssistant(cli: Groq) -> str`: Runs the AI assistant with the provided prompt and command.
 
 **Usage Examples**
 ------------------
 
-### Running the CLI Tool
+### Generating Code Documentation
 
-```bash
-python main.py /path/to/directory
-```
+* Run `python main.py w_doc` to generate documentation for the project.
 
-### Using the AIAssistant Class
+### Using the AI Assistant
 
-```python
-from ai_assistant import AIAssistant
-from groq import Groq
+* Run `python main.py w_code` to interact with the AI assistant.
 
-groq_client = Groq(api_key="your_api_key")
-assistant = AIAssistant(groq_client)
-result = assistant.run_assistant("Your Prompt", "Your Command")
-print(result)
-```
+**Error Handling and Debugging**
+--------------------------------
 
-**Error and Debugging Guidance**
----------------------------------
+* **File Not Found Error**: Ensure the file path is correct when using `process_file`.
+* **API Errors**: Check your API keys and ensure the services are available.
+* **Debugging**: Utilize the `rich` library for logging and debugging.
 
-### Common Errors
+**Contributing to the Project**
+-------------------------------
 
-* `OPENAI_API_KEY` not set: Ensure your API key is set in the `.env` file.
-* `NVAPI_API_KEY` not set: Verify your NVIDIA API key for the Groq client.
-
-### Debugging Tips
-
-* Use print statements to inspect variable values.
-* Utilize a debugger like `pdb` for step-by-step execution.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Submit a pull request with a clear description of your changes.
 
 **Maintenance Tips and Code Style**
 ------------------------------------
 
-### Code Conventions
-
-* Follow PEP 8 guidelines for Python code.
-* Use consistent naming conventions throughout the codebase.
-
-### Architecture Guidelines
-
-* Keep modules focused on specific functionality.
-* Use abstract base classes for interface definitions.
-
-**Contributing to the Codebase**
----------------------------------
-
-### Guidelines
-
-* Fork the repository and create a new branch for your changes.
-* Submit a pull request with a detailed description of your contributions.
-
-### Issue Tracking
-
-* Report bugs or feature requests using the issue tracker.
-* Assign a label to your issue (e.g., bug, feature, question).
-
-**Unit Tests**
---------------
-
-* Test File Processing Functions
-	+ `test_process_file_typical_case`
-	+ `test_process_file_non_existent_file`
-	+ `test_process_file_permission_error`
-	+ `test_save_to_json_typical_case`
-	+ `test_save_to_json_error_handling`
-	+ `test_process_directory_typical_case`
-	+ `test_process_directory_non_existent_dir`
-	+ `test_process_directory_ignores_pytest_cache`
-
-**Test Command**
-```bash
-python -m unittest discover -s tests -p 'test_*.py'
-```
+* Follow PEP 8 guidelines for Python code style.
+* Use consistent naming conventions throughout the project.
+* Keep API keys and sensitive information secure.
