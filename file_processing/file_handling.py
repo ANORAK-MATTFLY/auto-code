@@ -1,5 +1,5 @@
 import os
-import json
+from yaspin import yaspin
 
 
 
@@ -19,27 +19,22 @@ def create_markdown_file(filepath, content, encoding='utf-8'):
     
     with open(f"{filepath}.md", "w") as file:
         file.write(content)
-    print(f"'{filepath}' has been created with the provided content.")
-
-substrings = {".pytest_cache", "__pycache__", "node_modules"}
-
-def contains_any(substrings, main_string):
-    return any(substring in main_string for substring in substrings)
+    
 
 
 
-def process_directory(directory)-> dict:
+@yaspin(text="Scanning project...")
+def process_directory(directory)-> str:
+    loader = yaspin()
+    loader.start()
     """Walks through the directory and reads each file's content into a string."""
-    file_contents = {}  # Dictionary to store file paths and their contents as strings
-    data_store = {}
     
     # Walk through the directory and its subdirectories
     folders_to_ignore = [".pytest_cache", "__pycache__", "node_modules", "documents", "dist", "ano_code.egg-info", "auto-code-env"]
-    avoid = []
 
     fl = {".py", ".js", ".go", ".ts", ".tsx", ".jsx", ".dart"}
     
-    
+    code = ""
     for root, dirs, files in os.walk(directory):
         # Modify dirs in-place to exclude specific directories
         dirs[:] = [d for d in dirs if d not in folders_to_ignore]
@@ -49,14 +44,10 @@ def process_directory(directory)-> dict:
                         file_path = os.path.join(root, filename)
                         content = process_file(file_path)  # Read file into a string
                         if content is not None:
-                            file_contents[file_path] = content  # Store the string content for each file
+                            
                             if filename:
-                                md_content = f"{content}"
-                                create_markdown_file(f"./documents/{filename}", md_content)
-                                data_store[file_path] = {
-                                    "file_name": filename,
-                                    "dir": root,
-                                    "content": content, 
-                                }
-    return data_store
+                                code += f"{content}\n"
+
+    loader.stop()
+    return code
 

@@ -46,7 +46,7 @@ class AIAssistant(AIAssistantInterface):
                 "content": prompt,
             }
         ],
-        model=AIModel.LLAMA_3_1_NEMOTRON_70B_INSTRUCT.value,
+        model=AIModel.LLAMA_3_405B_INSTRUCT.value,
         temperature=0.5,
         max_tokens=1024,
         top_p=1,
