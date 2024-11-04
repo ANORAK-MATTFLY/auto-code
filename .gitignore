@@ -1,9 +1,11 @@
 __pycache__/
+auto-code-env/
+ano_code.egg-info/
 auto-code-env
 ano_code.egg-info
 .pytest_cache
-documents/
-
+dist
 *.pyc
 *.pyo
 *.pyd
+tkn.txt

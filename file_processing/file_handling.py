@@ -30,7 +30,7 @@ def process_directory(directory)-> str:
     """Walks through the directory and reads each file's content into a string."""
     
     # Walk through the directory and its subdirectories
-    folders_to_ignore = [".pytest_cache", "__pycache__", "node_modules", "documents", "dist", "ano_code.egg-info", "auto-code-env"]
+    folders_to_ignore = [".pytest_cache", "__pycache__", "node_modules", "dist", "ano_code.egg-info", "auto-code-env"]
 
     fl = {".py", ".js", ".go", ".ts", ".tsx", ".jsx", ".dart"}
     

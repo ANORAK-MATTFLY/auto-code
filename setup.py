@@ -11,7 +11,7 @@ openai==1.52.2
 
 setup(
     name="ano-code",
-    version="0.1.14",
+    version="0.1.18",
     packages=find_packages(),
     include_package_data=True,
     install_requires=deps.split("\n"),

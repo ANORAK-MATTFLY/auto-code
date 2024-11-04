@@ -1,3 +1,0 @@
-ai_assistant
-auto_code
-file_processing
