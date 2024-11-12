@@ -30,12 +30,14 @@ def process_directory(directory)-> str:
     """Walks through the directory and reads each file's content into a string."""
     
     # Walk through the directory and its subdirectories
-    folders_to_ignore = [".pytest_cache", "__pycache__", "node_modules", "dist", "ano_code.egg-info", "auto-code-env"]
+    folders_to_ignore = ".pytest_cache __pycache__ node_modules dist ano_code.egg-info auto-code-env"
+    process_file(".gitignore")
 
-    fl = {".py", ".js", ".go", ".ts", ".tsx", ".jsx", ".dart"}
+    fl = {".py", ".js", ".go", ".ts", ".tsx", ".jsx", ".dart", ".php", "Dockerfile", "docker-compose.yml"}
     
     code = ""
     for root, dirs, files in os.walk(directory):
+        
         # Modify dirs in-place to exclude specific directories
         dirs[:] = [d for d in dirs if d not in folders_to_ignore]
         for filename in files:

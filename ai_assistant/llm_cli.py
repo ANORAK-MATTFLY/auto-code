@@ -8,6 +8,6 @@ groq_client = Groq(
     
 
 openai_client = OpenAI(
-  base_url = "https://integrate.api.nvidia.com/v1",
-  api_key = "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",
+  # base_url = "https://integrate.api.nvidia.com/v1",
+  api_key = "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",
 )

@@ -1,5 +1,5 @@
 
-from ai_assistant.llm_cli import openai_client
+from ai_assistant.llm_cli import groq_client
 from ai_assistant.prompt_llm import AIAssistant
 from file_processing.error_handling import Failure, Ok
 from ai_assistant.consts import COMMANDS
@@ -21,7 +21,7 @@ def prompt(code: str)-> Failure | Ok:
     try:
         loader = yaspin()
         loader.start()
-        assistant = AIAssistant(openai_client)
+        assistant = AIAssistant(groq_client)
         result = assistant.run_assistant(code, COMMANDS["w_doc"])
         success = Ok(result)
         loader.stop()
@@ -46,8 +46,10 @@ def write_doc(directory):
     response = prompt(source_code)
     if type(response) == Ok:
         file_handling.create_markdown_file("./documentation", response.data)
+        console.print("check for: documentation.md at the root of your project 📁", style="fun")
+        console.print("Thanks for using ano-code 😉", style="fun")
     else:
-        console.print(response.data, style="failure")
+        console.print("Something went wrong", style="failure")
 
 
 cli.add_command(write_doc)

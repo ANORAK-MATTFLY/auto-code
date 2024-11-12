@@ -1,9 +1,9 @@
 from groq import Groq
 from openai import OpenAI
+import openai
 from ai_assistant.interfaces import LlmOptions, LlmInterface, AIAssistantInterface
 from ai_assistant.consts import UserRole, AIModel
 from typing import TypeVar
-
 T = TypeVar('T')
 
 
@@ -14,11 +14,10 @@ class PromptLlm(LlmInterface):
     def __init__(self, llm_options: LlmOptions)-> None:
         super().__init__(llm_options)
 
-    def prompt(self, cli: T) -> (str | None):
+    def prompt(self, cli: T) -> str:
         opt = self.llm_options
-        
         chat_completion = cli.chat.completions.create(
-            messages=opt.messages,
+                messages=opt.messages,
                 model=opt.model,
                 temperature=0.5,
                 max_tokens=1024,
@@ -26,9 +25,9 @@ class PromptLlm(LlmInterface):
                 stop=None,
                 stream=False,
             )
+        
         prompt_result = chat_completion.choices[0].message.content
         return prompt_result
-        
 
 
 
@@ -49,7 +48,7 @@ class AIAssistant(AIAssistantInterface):
                 "content": prompt,
             }
         ],
-        model=AIModel.LLAMA_3_405B_INSTRUCT.value,
+        model=AIModel.LLAMA_3_70B_VERSATILE.value,
         temperature=0.5,
         max_tokens=1024,
         top_p=1,
