@@ -49,7 +49,7 @@ def write_doc(directory):
         console.print("check for: documentation.md at the root of your project 📁", style="fun")
         console.print("Thanks for using ano-code 😉", style="fun")
     else:
-        console.print("Something went wrong", style="failure")
+        console.print("Something went wrong", style="failure.")
 
 
 cli.add_command(write_doc)
