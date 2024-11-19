@@ -47,7 +47,7 @@ def write_doc(directory):
     if type(response) == Ok:
         file_handling.create_markdown_file("./documentation", response.data)
         console.print("check for: documentation.md at the root of your project 📁", style="fun")
-        console.print("Thanks for using ano-code 😉", style="fun")
+        console.print("Thanks for using ano-code 😉.", style="fun")
     else:
         console.print("Something went wrong", style="failure")
 
