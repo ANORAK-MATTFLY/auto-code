@@ -18,9 +18,9 @@ class PromptLlm(LlmInterface):
         opt = self.llm_options
         chat_completion = cli.chat.completions.create(
                 messages=opt.messages,
-                model=opt.model,
+                model=AIModel.GEMMA_2_9_IT.value,
                 temperature=0.5,
-                max_tokens=1024,
+                max_tokens=30,
                 top_p=1,
                 stop=None,
                 stream=False,
@@ -50,7 +50,7 @@ class AIAssistant(AIAssistantInterface):
         ],
         model=AIModel.LLAMA_3_70B_VERSATILE.value,
         temperature=0.5,
-        max_tokens=1024,
+        max_tokens=30,
         top_p=1,
         stop=None,
         stream=False,

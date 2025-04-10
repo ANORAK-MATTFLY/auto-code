@@ -10,3 +10,4 @@ dist
 *.pyo
 *.pyd
 tkn.txt
+venv/

@@ -11,9 +11,9 @@ class AgentType(Enum):
     TRANSLATOR_AGENT = "translator"
     
 class AIModel(Enum):
-    LLAMA_3_70B_VERSATILE = "llama-3.1-70b-versatile"
-    LLAMA_3_405B_INSTRUCT = "meta/llama-3.1-405b-instruct"
-    LLAMA_3_1_NEMOTRON_70B_INSTRUCT = "nvidia/llama-3.1-nemotron-70b-instruct"
+    LLAMA_3_70B_VERSATILE = "llama-3.3-70b-versatile"
+    
+    GEMMA_2_9_IT = "gemma2-9b-it"
 
 
 DOCUMENTATION_RULES = """
@@ -45,21 +45,28 @@ Open to Contributions: For open-source projects, guidelines on how to contribute
 
 
 COMMANDS: dict[str, str] = {
-        "w_test_py": """
-        you are a senior developer with 40 years of experience in professional programiming and software testing.
-        Generate unit tests for each function, class and method in the this file. Include test cases for various edge cases, typical cases, and error-handling scenarios.
-        Create unit tests in Python using the unittest module for the classes and functions in this file. Write each test case with clear assertions and explain any mocks or setup required.
-        Write pytest-compatible tests for all functions and classes in this file. Focus on testing input validation, edge cases, and typical use cases for each function.
-        When writing unit tests for the classes in this file. Ensure coverage for all methods, including initialization, helper methods, and public methods. Test different input scenarios and edge cases.
-        Include setup and teardown steps if needed, and make sure to test edge cases and expected exceptions.
-        Make use of mocks where external resources (like databases or APIs) are involved.
-        Include examples of inputs that should pass, fail, or raise specific exceptions.
-        focusing on different types of input validation, boundary conditions, and return values.
-        For functions and classes that depend on external resources, such as databases or APIs, generate unit tests using mocks or stubs to isolate functionality.
-        Include scenarios where errors should be raised. Verify that appropriate error messages are provided and correct exceptions are raised.
+
+        "w_doc_f": """
+        "You are a senior developer with 40 years of experience in professional programming and software DOCUMENTATION.
+        This code comes from a folder that contains code. generate a code documentation for it with as much code illustrations and details you can, use markdown format for your answer. Don't add any text just the documentation
         """,
-        "w_code": "you are a helpful assistant that acts as a translator with 30 years of experience and that cares about the nuances and jargon of the languages he operate with.",
-        "w_doc": f"""You are a senior developer with 40 years of experience in professional programiming. Write a profecional looking documentation for this code base using markdown conventions and your response should only limit its self to the markdown documentation, no additional text.
-        Your response should follow this roules : ${DOCUMENTATION_RULES}
+        "w_m_doc": """
+        You are a senior developer with 40 years of experience in professional programming and software DOCUMENTATION.
+        This are code documentation generated from separated folders make it cohesive and include as much code example as possible. Use Markdown format for your answer don't add any text just the documentation.
+        Your response should follow this rules : ${DOCUMENTATION_RULES}
+        """,
+        "comment_path": f"""
+        You are an expert software developer documentation assistant.
+        Given the following file or folder path relative to a project root, provide a very brief, concise description (max 10 words) of its likely purpose or content.
+        This description will be used as a comment next to the item in a directory tree structure.
+        Focus on common conventions for this type of file/folder name or extension. Be generic if unsure.
+        You can base yourself on on a file's content if it is a file.
+        Examples:
+        - path: 'src/components/Button.tsx' -> comment: 'Reusable UI button component'
+        - path: 'config/database.js' -> comment: 'Database configuration settings'
+        - path: 'tests/' -> comment: 'Contains automated tests'
+        - path: 'package.json' -> comment: 'Project metadata and dependencies'
+        - path: 'README.md' -> comment: 'Project overview and instructions'
+        - path: '.github/workflows/' -> comment: 'CI/CD automation workflows'
         """
 }

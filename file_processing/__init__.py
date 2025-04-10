@@ -1,1 +1,1 @@
-__all__ = ['file_handling', "process_file", "error_handling"]
+__all__ = ['scan_project', 'generate_project_structure', 'file_handling']
